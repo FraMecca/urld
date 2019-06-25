@@ -1,8 +1,8 @@
 {
-	"name": "urld",
-	"description": "A URL parsing library",
-	"copyright": "Copyright © 2015, dhasenan",
-	"authors": ["dhasenan"],
+	"name": "urllib",
+	"description": "A URL parsing library, aimed at web urls",
+	"copyright": "Copyright © 2019, Francesco Mecca",
+	"authors": ["framecca"],
 	"license": "MIT",
 	"dependencies": {
 	}

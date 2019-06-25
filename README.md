@@ -1,23 +1,14 @@
-urld
+urllib
 ====
-URL handling for D
+Web URL handling for D
 
 Motivation
 ----------
-D's standard library has nothing for working with URLs.
 
-Vibe.d can work with URLs. However, Vibe is big. Also, we want to work easily with query strings,
-which vibe.d doesn't allow.
+[dhasenan's url library](https://github.com/dhasenan/urld) is great but I needed something more specific for web urls.
 
-Status
-------
-There are some convenience accessors to add.
-
-No backwards-incompatible changes are planned.
-
-Installation
-------------
-Add `"urld": "~>2.0.1"` to your `dub.json`.
+In particular, this library handles subdomains and tld.
+Also, no implicit conversion to strings.
 
 Usage
 -----
@@ -34,12 +25,14 @@ Construct one from scratch, laboriously:
 URL url;
 with (url) {
 	scheme = "soap.beep";
-	host = "beep.example.net";
+	host = "example";
+    tld = "org";
+    subdomain = "beep";
 	port = 1772;
 	path = "/serverinfo/info";
   queryParams.add("token", "my-api-token");
 }
-curl.get(url);
+curl.get(url.toString);
 ```
 
 Unicode domain names:
@@ -48,14 +41,6 @@ Unicode domain names:
 auto url = "http://☃.com/".parseURL;
 writeln(url.toString);               // http://xn--n3h.com/
 writeln(url.toHumanReadableString);  // http://☃.com/
-```
-
-Implicit conversion to strings for use with other libraries that expect URLs as strings:
-
-```D
-import std.net.curl;
-auto couchdbURL = "http://couch.local:8815".parseURL;
-writeln(get(couchdbURL ~ "users/bob.dobbs@subgenius.org"));
 ```
 
 Autodetect ports:
